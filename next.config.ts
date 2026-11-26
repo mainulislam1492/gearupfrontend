@@ -1,19 +1,13 @@
 import type { NextConfig } from "next";
 
+const BACKEND = process.env.BACKEND_URL ?? "https://gear-up-peach.vercel.app";
+
 const nextConfig: NextConfig = {
-  /* config options here */
-  experimental: {
-    agentFeedback: true,
+  images: {
+    remotePatterns: [{ protocol: "https", hostname: "**" }],
   },
-  cacheComponents: true,
-  partialPrefetching: true,
-  turbopack: {
-    rules: {
-      "*.css": {
-        loaders: ["@tailwindcss/turbopack"],
-        as: "*.css",
-      },
-    },
+  async rewrites() {
+    return [{ source: "/api/:path*", destination: `${BACKEND}/api/:path*` }];
   },
 };
 
