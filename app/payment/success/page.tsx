@@ -121,7 +121,6 @@
 // }
 
 
-
 "use client";
 
 import { Suspense, useEffect, useRef } from "react";
@@ -143,20 +142,16 @@ function SuccessContent() {
       window.location.replace(`${window.location.origin}${DASHBOARD_PATH}`);
     };
 
-    const body = CUSTOMER.confirmBody({
-      sessionId: params.get("session_id") || params.get("sessionId"),
-      paymentIntentId: params.get("payment_intent") || params.get("paymentIntentId"),
-      paymentId: params.get("paymentId") || params.get("payment_id"),
-    });
+    const transactionId = params.get("transactionId");
 
-    if (Object.keys(body).length === 0) {
+    if (!transactionId) {
       goToDashboard();
       return;
     }
 
     apiFetch(CUSTOMER.paymentConfirm, {
       method: "POST",
-      body: JSON.stringify(body),
+      body: JSON.stringify({ transactionId }),
     })
       .catch(() => {})
       .finally(goToDashboard);
