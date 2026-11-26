@@ -61,24 +61,32 @@
 
 
 
-
 "use client";
 
 import { Suspense, useEffect, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { apiFetch } from "../../../lib/http";
 
+const ORDERS_PATH = "/customer/orders";
+
 function SuccessContent() {
   const params = useSearchParams();
   const router = useRouter();
-  const transactionId = params.get("transactionId");
+
+  // accept the different names gateways use
+  const transactionId =
+    params.get("transactionId") ||
+    params.get("tran_id") ||
+    params.get("tranId") ||
+    params.get("val_id");
+
   const [status, setStatus] = useState<"loading" | "paid" | "failed">("loading");
   const [error, setError] = useState("");
   const [copied, setCopied] = useState(false);
   const called = useRef(false);
 
   useEffect(() => {
-    if (called.current) return; // avoid the double call in dev
+    if (called.current) return;
     called.current = true;
 
     if (!transactionId) {
@@ -98,8 +106,14 @@ function SuccessContent() {
       });
   }, [transactionId]);
 
-  const handleOk = () => {
-    router.push("/customer/orders");
+  const goToOrders = () => {
+    router.replace(ORDERS_PATH);
+    // fallback: hard navigation on the current domain (never localhost)
+    setTimeout(() => {
+      if (window.location.pathname !== ORDERS_PATH) {
+        window.location.assign(`${window.location.origin}${ORDERS_PATH}`);
+      }
+    }, 500);
   };
 
   const handleCopy = async () => {
@@ -108,9 +122,7 @@ function SuccessContent() {
       await navigator.clipboard.writeText(transactionId);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
-    } catch {
-      // clipboard may be unavailable; ignore
-    }
+    } catch {}
   };
 
   if (status === "loading") {
@@ -138,8 +150,8 @@ function SuccessContent() {
           </h1>
           <p className="mb-6 text-sm text-gray-500">Reason: {error}</p>
           <button
-            onClick={handleOk}
-            className="w-full rounded-lg bg-gray-900 px-4 py-3 font-medium text-white transition hover:bg-gray-800"
+            onClick={goToOrders}
+            className="w-full rounded-lg bg-gray-900 px-4 py-3 font-medium text-white hover:bg-gray-800"
           >
             Go to Orders
           </button>
@@ -180,8 +192,8 @@ function SuccessContent() {
         </div>
 
         <button
-          onClick={handleOk}
-          className="w-full rounded-lg bg-green-600 px-4 py-3 font-medium text-white transition hover:bg-green-700"
+          onClick={goToOrders}
+          className="w-full rounded-lg bg-green-600 px-4 py-3 font-medium text-white hover:bg-green-700"
         >
           OK
         </button>
