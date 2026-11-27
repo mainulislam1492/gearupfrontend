@@ -3,7 +3,7 @@
 Maps every frontend page and component in GearUp to the backend endpoint it calls.
 
 - **Backend:** `https://gear-up-peach.vercel.app` (Express, Prisma, PostgreSQL)
-- **Frontend:** Next.js (App Router), shadcn/ui, Tailwind CSS
+- **Frontend:** `https://gearupfrontend-ashen.vercel.app/` Next.js (App Router), shadcn/ui, Tailwind CSS
 
 ## How the frontend talks to the backend
 
