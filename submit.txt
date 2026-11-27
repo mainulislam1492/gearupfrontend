@@ -1,0 +1,9 @@
+Live Link : https://gearupfrontend-ashen.vercel.app/
+
+github link : https://github.com/mainulislam1492/gearupfrontend
+
+
+video link : https://drive.google.com/file/d/1EiGeXhFOBJRQOFkxS4vPdTFVih2RAClx/view?usp=sharing
+
+# ADMIN_EMAIL=admin123@gmail.com
+# ADMIN_PASSWORD=admin@123
