@@ -1,36 +1,59 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# GearUp Frontend
+ 
+GearUp is a sports gear rental platform where customers rent gear, providers list and manage their inventory, and admins moderate the marketplace.
+ 
+**Live Demo:** [https://gearupfrontend-ashen.vercel.app/](https://gearupfrontend-ashen.vercel.app/)
+ 
+## User Roles
+ 
+| Role | Description | Account |
+|------|-------------|---------|
+| Customer | Rents sports gear | Self-register, select "customer" |
+| Provider | Gear vendor or rental shop | Self-register, select "provider" |
+| Admin | Platform moderator | Created by seed script (no self-registration) |
+ 
+## Features
+ 
+**Public (no login)**
+- Browse, search, filter (category, brand, price, availability) and sort gear with pagination
+- View gear details: specifications, images, provider shop, reviews and average rating
+- View all categories
+**Authentication and Account**
+- Register, login, logout, refresh token, change password
+- View and update profile (name, phone, address, photo)
+- Providers can add and update shop name and address
+- Suspended users cannot log in
+**Customer**
+- Place rental orders (server-calculated pricing, date-based stock check)
+- View, track and cancel orders (only while `PLACED`)
+- Pay with Stripe or SSLCommerz, view payment history, retry failed payments
+- Review gear (1-5 rating and comment) after it is returned
+**Provider**
+- Add, edit and remove gear (rental-history gear is hidden instead of deleted)
+- Manage stock and availability
+- View incoming orders; confirm, mark picked up, mark returned
+**Admin**
+- View users, filter by role/status, suspend or activate them
+- View all gear (including hidden), hide or restore listings
+- View all orders with filters
+- Create, update and delete categories (categories with gear cannot be deleted)
 
 ## Getting Started
-
-First, run the development server:
-
+ 
 ```bash
+# Clone the repository
+git clone <https://github.com/mainulislam1492/gearupfrontend.git>
+cd gearupfrontend
+ 
+# Install dependencies
+npm install
+ 
+# Run the development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+ 
+ 
+## Deployment
+ 
+Deployed on Vercel: [gearupfrontend-ashen.vercel.app](https://gearupfrontend-ashen.vercel.app/)
+ 
